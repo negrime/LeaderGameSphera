@@ -19,25 +19,24 @@ public class Cam : MonoBehaviour
     
     private void Movement()
     {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                _camera.orthographicSize += 0.1f;
-    
+                _camera.orthographicSize -= 0.25f;
             }
     
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                _camera.orthographicSize -= 0.1f;
+                _camera.orthographicSize += 0.25f;
             }
     
             if (Input.GetKey(KeyCode.W))
             {
-                transform.position += new Vector3(0, 0.25f, 0);
+                transform.position -= new Vector3(0, 0, 0.25f);
             }
     
             if (Input.GetKey(KeyCode.S))
             {
-                transform.position -= new Vector3(0, 0.25f, 0);
+                transform.position += new Vector3(0, 0, 0.25f);
             }
     
             if (Input.GetKey(KeyCode.A))

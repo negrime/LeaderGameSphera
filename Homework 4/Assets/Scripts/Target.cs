@@ -15,10 +15,11 @@ public class Target : MonoBehaviour
 
     private void UpdateTargets ( Vector3 targetPosition )
     {
-       navAgents = FindObjectsOfType(typeof(NavMeshAgent)) as NavMeshAgent[];
-      foreach(NavMeshAgent agent in navAgents) 
+      navAgents = FindObjectsOfType(typeof(NavMeshAgent)) as NavMeshAgent[];
+      foreach(NavMeshAgent agent in navAgents)
       {
-        agent.destination = targetPosition;
+          if (agent.gameObject.tag.Equals("Player"))
+                agent.destination = targetPosition;
       }
     }
 
