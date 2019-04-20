@@ -5,22 +5,21 @@ using UnityEngine.AI;
 
 public class Target : MonoBehaviour
 {
-    private NavMeshAgent[] navAgents;
+
     public Transform targetMarker;
 
     private void Start ()
     {
-     
+        
     }
 
     private void UpdateTargets ( Vector3 targetPosition )
     {
-      navAgents = FindObjectsOfType(typeof(NavMeshAgent)) as NavMeshAgent[];
-      foreach(NavMeshAgent agent in navAgents)
-      {
-          if (agent.gameObject.tag.Equals("Player"))
-                agent.destination = targetPosition;
-      }
+      
+  //    foreach(NavMeshAgent agent in GameManager.Instance.navAgents)
+    //  {
+      //   agent.destination = targetPosition;
+      //}
     }
 
     private void Update ()
@@ -33,8 +32,10 @@ public class Target : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo)) 
             {
                 Vector3 targetPosition = hitInfo.point;
-                UpdateTargets(targetPosition);
+              //  UpdateTargets(targetPosition);
                 targetMarker.position = targetPosition;
+                GameManager.Instance.SetTarget(targetMarker.position);
+
             }
         }
     }

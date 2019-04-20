@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
     public int enemyAmount;
-
     public int playerAmount;
-    // Start is called before the first frame update
+    public int totalSum;
+
+    private GameObject _player;
+//    public List<NavMeshAgent> navAgents;
+    public Vector3 target;
+
     private void Awake()
     {
+        target = GameObject.Find("Player").transform.position;
         Instance = this;
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        totalSum = playerAmount + enemyAmount;
     }
 
     public void AddUnit(string ally)
@@ -37,5 +36,23 @@ public class GameManager : MonoBehaviour
         {
             playerAmount++;
         }
+    }
+
+    public void RemoveUnit(string ally)
+    {
+        if (ally.Equals("Enemy") && enemyAmount != 0)
+        {
+            enemyAmount--;
+        }
+        else if (playerAmount != 0)
+        {
+            playerAmount--;
+        }
+    }
+    
+
+    public void SetTarget(Vector3 target)
+    {
+        this.target = target;
     }
 }
