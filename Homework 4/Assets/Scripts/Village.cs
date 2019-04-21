@@ -15,7 +15,7 @@ public class Village : MonoBehaviour
 
     public float timeKek;
     public float curTime;
-    public bool IsSeizing;
+    public bool isSeizing;
     void Start()
     {
         currentTime = 0;
@@ -40,20 +40,19 @@ public class Village : MonoBehaviour
             currentTime += Time.deltaTime;
         }
 
-        if (IsSeizing)
+        if (isSeizing)
         {
             curTime += Time.deltaTime;   
         }
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<Bot>().botType != Bot.BotType.Neutral)
-            IsSeizing = true;
+
         
         if (botType == Bot.BotType.Neutral && (other.gameObject.CompareTag("Player")))
         {
-            
+            isSeizing = true;
             if (curTime > timeKek)
             {
                 curTime = 0;
@@ -63,15 +62,19 @@ public class Village : MonoBehaviour
 
         if (botType == Bot.BotType.Enemy && (other.gameObject.CompareTag("Player")))
         {
-            IsSeizing = true;
-            curTime = 0;
-            botType = Bot.BotType.Player;
-            
+            isSeizing = true;
+            if (curTime > timeKek)
+            {
+                curTime = 0;
+                botType = Bot.BotType.Player;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IsSeizing = false;
+        isSeizing = false;
+        curTime = 0;
     }
+    */
 }

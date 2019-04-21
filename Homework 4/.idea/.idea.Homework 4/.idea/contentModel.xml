@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\scorp\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\scorp\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Homework 4.-1129309606.00" t="ExcludeRecursive" />
+    <e p="C:\Users\scorp\Desktop\GIT\LeaderGameSphera\Homework 4" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AurynSky" t="Include">
+          <e p="ArenaAssets" t="Include">
+            <e p="Desert Arena" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="ChestDemo.cs" t="Include" />
+                <e p="MaterialMover.cs" t="Include" />
+                <e p="Rotator.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="MegaPack1Lite" t="Include">
           <e p="EnchantedForestPack1" t="Include">
             <e p="README.txt" t="Include" />
@@ -27,25 +40,26 @@
             <e p="README.txt" t="Include" />
           </e>
         </e>
+        <e p="Polygonal Particles" t="Include">
+          <e p="Assets" t="Include">
+            <e p="Shaders" t="Include">
+              <e p="GradientBackgroundShader.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Scenes" t="Include">
+          <e p="Low_Poly_Survival" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="SimpleCameraController.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Bot.cs" t="Include" />
           <e p="Cam.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="Target.cs" t="Include" />
           <e p="Village.cs" t="Include" />
-        </e>
-        <e p="TAZO_3D_C" t="Include">
-          <e p="BOSS" t="Include">
-            <e p="Bull" t="Include">
-              <e p="Shader" t="Include">
-                <e p="Cartoon.shader" t="Include" />
-              </e>
-            </e>
-          </e>
-          <e p="DemoScene" t="Include">
-            <e p="Action_Manage.cs" t="Include" />
-            <e p="demo.cs" t="Include" />
-          </e>
         </e>
       </e>
       <e p="Homework 4.sln" t="IncludeFlat" />
@@ -56,7 +70,5 @@
         <e p="bin" t="ExcludeRecursive" />
       </e>
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_Homework 4.399197039.00" t="ExcludeRecursive" />
   </component>
 </project>

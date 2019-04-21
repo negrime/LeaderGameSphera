@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int playerAmount;
     public int totalSum;
 
-    private GameObject _player;
+    public GameObject player;
 //    public List<NavMeshAgent> navAgents;
     public Vector3 target;
 

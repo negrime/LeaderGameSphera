@@ -22,11 +22,13 @@ public class Cam : MonoBehaviour
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 _camera.orthographicSize -= 0.25f;
+                transform.position -= new Vector3(0, 25, 0) * Time.deltaTime;
             }
     
             if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
                 _camera.orthographicSize += 0.25f;
+                transform.position += new Vector3(0, 25, 0) * Time.deltaTime;
             }
     
             if (Input.GetKey(KeyCode.W))
