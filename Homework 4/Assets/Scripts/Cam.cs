@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cam : MonoBehaviour
 {
-    public Transform target;
+   // public Transform target;
     private Camera _camera;
     void Start()
     {

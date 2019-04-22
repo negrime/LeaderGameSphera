@@ -98,8 +98,9 @@ public class Bot : MonoBehaviour
                }
            }
        }
+       //       Debug.Log(GameManager.Instance.player.GetComponent<NavMeshAgent>().hasPath);
        
-        if (botType == BotType.Player)     
+        if (botType == BotType.Player)    
          agent.SetDestination(GameManager.Instance.target);
 
 

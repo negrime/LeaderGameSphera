@@ -7,9 +7,11 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public List<GameObject> villages;
     public int enemyAmount;
     public int playerAmount;
     public int totalSum;
+    public Transform targetMarker;
 
     public GameObject player;
 //    public List<NavMeshAgent> navAgents;
@@ -54,5 +56,6 @@ public class GameManager : MonoBehaviour
     public void SetTarget(Vector3 target)
     {
         this.target = target;
+        targetMarker.position = target;
     }
 }

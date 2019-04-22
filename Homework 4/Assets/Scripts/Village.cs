@@ -19,6 +19,10 @@ public class Village : MonoBehaviour
     void Start()
     {
         currentTime = 0;
+        if (botType == Bot.BotType.Neutral)
+        {
+           GameManager.Instance.villages.Add(gameObject); 
+        }
     }
 
     void Update()
@@ -26,7 +30,7 @@ public class Village : MonoBehaviour
         if (currentTime >= time)
         {
             if (botType == Bot.BotType.Neutral)
-                Instantiate(neutral, spawnPosition.position + new Vector3(Random.Range(0, 3),0, Random.Range(0, 3)), Quaternion.identity);
+                Instantiate(neutral, spawnPosition.position + new Vector3(Random.Range(1, 3),0, Random.Range(1, 3)), Quaternion.identity);
             else if (botType == Bot.BotType.Player)
                 Instantiate(player, spawnPosition.position + new Vector3(Random.Range(0, 3),0, Random.Range(0, 3)), Quaternion.identity);
             else
