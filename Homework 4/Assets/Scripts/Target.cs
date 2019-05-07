@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,12 +24,12 @@ public class Target : MonoBehaviour
     private void Update ()
     {
         
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || (Input.GetKeyDown(KeyCode.Keypad1)))
         {
             float min = 0;
             Vector3 target = new Vector3();
             bool index = false;
-            foreach (var i in GameManager.Instance.villages)
+            foreach (var i in GameManager.Instance.neutralVillages)
             {
                 if (!index)
                 {
@@ -44,8 +45,31 @@ public class Target : MonoBehaviour
 
             }       
             GameManager.Instance.SetTarget(target);
-            
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) || (Input.GetKeyDown(KeyCode.Keypad2)))
+        {
+            float min = 0;
+            Vector3 target = new Vector3();
+            bool index = false;
+            foreach (var i in GameManager.Instance.enemyVillages)
+            {
+                if (!index)
+                {
+                    min = Vector3.Distance(GameManager.Instance.player.transform.position, i.transform.position);
+                    index = true;
+                    target = i.GetComponent<Village>().spawnPosition.position ;
+                }
+                else if (Vector3.Distance(GameManager.Instance.player.transform.position, i.transform.position) < min)
+                {
+                    min = Vector3.Distance(GameManager.Instance.player.transform.position, i.transform.position);
+                    target = i.GetComponent<Village>().spawnPosition.position ;
+                }
+
+            }       
+            GameManager.Instance.SetTarget(target);
+        }
+        //if (Input.GetKeyDown((KeyCode.)))
         if(GetInput(ref _mouseBtn)) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -60,7 +84,7 @@ public class Target : MonoBehaviour
                 if (_mouseBtn == 1)
                 {
                     GameManager.Instance.player.GetComponent<Bot>().agent.stoppingDistance =
-                    Vector3.Distance(GameManager.Instance.player.transform.position, targetPosition) * 0.6f;
+                    Vector3.Distance(GameManager.Instance.player.transform.position, targetPosition) * 0.7f;
                    // GameManager.Instance.player.GetComponent<Bot>().agent.speed = 5;
                 }
                 else if (_mouseBtn == 0)
@@ -87,9 +111,6 @@ public class Target : MonoBehaviour
             btn = 1;
             return true;
         }
-
-
-
         return false;
     }
 

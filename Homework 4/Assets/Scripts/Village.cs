@@ -13,15 +13,21 @@ public class Village : MonoBehaviour
     public float currentTime;
     public Bot.BotType botType;
 
-    public float timeKek;
+
     public float curTime;
     public bool isSeizing;
+    
+    
     void Start()
     {
         currentTime = 0;
         if (botType == Bot.BotType.Neutral)
         {
-           GameManager.Instance.villages.Add(gameObject); 
+           GameManager.Instance.neutralVillages.Add(gameObject); 
+        }
+        else if (botType == Bot.BotType.Enemy)
+        {
+            GameManager.Instance.enemyVillages.Add(gameObject);
         }
     }
 
