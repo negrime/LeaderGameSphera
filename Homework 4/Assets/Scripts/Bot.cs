@@ -13,13 +13,14 @@ public class Bot : MonoBehaviour
     public ParticleSystem explosion;
 
 
+
     public enum BotType {Player, Enemy, Neutral}
     public BotType botType;
-    private string _ally;
-
+    private readonly Vector3[]  _directions = new[] {Vector3.forward, Vector3.left, Vector3.right};
     [Header("Materials")] 
     public Material playerMaterial;
     public Material enemyMaterial;
+    
    
     void Start()
     {
@@ -44,74 +45,34 @@ public class Bot : MonoBehaviour
             agent.SetDestination(_player.position);
         }
 
+        // Запуск 3х лучей
+        foreach (var i  in _directions)
+        {
+            if (botType == BotType.Enemy)
+            {
+                RaycastHit hit;
+                Debug.DrawRay(transform.position, i * 50, Color.green);
+ 
+                if(Physics.Raycast(gameObject.transform.position, i, out hit, 50.0f))
+                {
+    
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        Debug.DrawRay(transform.position, i * 50, Color.red);
+                        agent.SetDestination(hit.point);
+                    }
+                }
+            }   
+        }
 
-       
-       if (botType == BotType.Enemy)
-       {
-           RaycastHit hit;
-           Vector3 fwd = gameObject.transform.TransformDirection(Vector3.forward);
-        //   Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, fwd * 50, Color.green);
- 
-           if(Physics.Raycast(gameObject.transform.position, fwd, out hit, 50.0f))//Есть пересечение
-           {
-    
-               if (hit.collider.CompareTag("Player"))
-               {
-                   Debug.DrawRay(transform.position, fwd * 50, Color.red);
-                   agent.SetDestination(hit.point);
-               }
-           }
-       }
-       
-       if (botType == BotType.Enemy)
-       {
-           RaycastHit hit;
-           Vector3 fwd = gameObject.transform.TransformDirection(Vector3.left);
-           //   Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-           Debug.DrawRay(transform.position, fwd * 50, Color.green);
- 
-           if(Physics.Raycast(gameObject.transform.position, fwd, out hit, 50.0f))//Есть пересечение
-           {
-    
-               if (hit.collider.CompareTag("Player"))
-               {
-                   Debug.DrawRay(transform.position, fwd * 50, Color.red);
-                   agent.SetDestination(hit.point);
-               }
-           }
-       }
-       if (botType == BotType.Enemy)
-       {
-           RaycastHit hit;
-           Vector3 fwd = gameObject.transform.TransformDirection(Vector3.right);
-           //   Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-           Debug.DrawRay(transform.position, fwd * 50, Color.green);
- 
-           if(Physics.Raycast(gameObject.transform.position, fwd, out hit, 50.0f))//Есть пересечение
-           {
-    
-               if (hit.collider.CompareTag("Player"))
-               {
-                   Debug.DrawRay(transform.position, fwd * 50, Color.red);
-                   agent.SetDestination(hit.point);
-               }
-           }
-       }
-       //       Debug.Log(GameManager.Instance.player.GetComponent<NavMeshAgent>().hasPath);
-       
         if (botType == BotType.Player)    
          agent.SetDestination(GameManager.Instance.target);
-
-
-
-       
-
     }
 
-    public void Die()
+    public void Die(GameObject go)
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(go);
 
     }
     
@@ -124,17 +85,20 @@ public class Bot : MonoBehaviour
             if (other.gameObject.tag.Equals("Player"))
             {
                 _renderer.material.color = playerMaterial.color;
-            //   agent = gameObject.AddComponent<NavMeshAgent>();
+               Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
+               r[1].material.color = playerMaterial.color;
+
+
+               
+             //  kek.material = enemyMaterial;
                agent.stoppingDistance = 3;
-                tag = other.gameObject.tag;
-                botType = BotType.Player;
-                GameManager.Instance.AddUnit(tag);
-            
+               gameObject.tag = other.gameObject.tag;
+               botType = BotType.Player;
+               GameManager.Instance.AddUnit(tag);
             }
             else if (other.gameObject.tag.Equals("Enemy"))
             {
                 _renderer.material.color = enemyMaterial.color;
-             //   agent = gameObject.GeComponent<NavMeshAgent>();
                 tag = other.gameObject.tag;
                 botType = BotType.Enemy;
                 GameManager.Instance.AddUnit(tag);
@@ -147,9 +111,10 @@ public class Bot : MonoBehaviour
             if ((other.gameObject.tag.Equals("Player") && (other.gameObject.name != "Player")))
             {
                 if (rnd == 1)
-                    //  if (other.gameObject.tag.Equals("Player") && (GameManager.Instance.playerAmount > GameManager.Instance.enemyAmount))
                 {
                     _renderer.material.color = playerMaterial.color;
+                    Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
+                    r[1].material.color = playerMaterial.color;
                     tag = other.gameObject.tag;
                     botType = BotType.Player;
                     GameManager.Instance.RemoveUnit("Enemy");
@@ -157,8 +122,7 @@ public class Bot : MonoBehaviour
                 }
                 else
                 {
-                    Destroy(other.gameObject);
-                    other.GetComponent<Bot>().Die();
+                    other.GetComponent<Bot>().Die(other.gameObject);
                     GameManager.Instance.RemoveUnit("Player");
                 }
             }
@@ -171,7 +135,6 @@ public class Bot : MonoBehaviour
             if (other.gameObject.tag.Equals("Enemy") && (gameObject.name != "Player"))
             {
                 if (rnd == 1)
-                    //if (other.gameObject.tag.Equals("Enemy") && (GameManager.Instance.playerAmount < GameManager.Instance.enemyAmount) && gameObject.name != "Player")
                 {
                     _renderer.material.color = enemyMaterial.color;
                     tag = other.gameObject.tag;
@@ -181,8 +144,7 @@ public class Bot : MonoBehaviour
                 }
                 else
                 {
-                    other.GetComponent<Bot>().Die();
-                    Destroy(other.gameObject);
+                    other.GetComponent<Bot>().Die(other.gameObject);
                     GameManager.Instance.RemoveUnit("Enemy");
                 }
             }

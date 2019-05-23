@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public Transform targetMarker;
 
     public GameObject player;
-//    public List<NavMeshAgent> navAgents;
     public Vector3 target;
 
     private void Awake()

@@ -21,7 +21,6 @@ public class Chicken : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = gameObject.transform.TransformDirection(new Vector3(0, 0.2f, 1));
-        //   Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
         Debug.DrawRay(transform.position, fwd * 5, Color.green);
  
         if (Physics.Raycast(gameObject.transform.position, fwd, out hit, 5.0f))//Есть пересечение

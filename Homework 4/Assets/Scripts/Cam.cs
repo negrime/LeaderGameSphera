@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Cam : MonoBehaviour
 {
-   // public Transform target;
     private Camera _camera;
     public float movementSpeed;
     public float zoomSpeed;
     void Start()
     {
         _camera = GetComponent<Camera>();
+        Debug.Log(GameManager.Instance.player.transform.position.x);
     }
     
 
@@ -21,13 +21,13 @@ public class Cam : MonoBehaviour
     
     private void Movement()
     {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && _camera.transform.position.y >= 15) 
             {
                 _camera.orthographicSize -= 0.25f;
                 transform.position -= new Vector3(0, zoomSpeed, 0) * Time.deltaTime;
             }
     
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (Input.GetAxis("Mouse ScrollWheel") < 0 && _camera.transform.position.y <= 75)
             {
                 _camera.orthographicSize += 0.25f;
                 transform.position += new Vector3(0, zoomSpeed, 0) * Time.deltaTime;
@@ -52,6 +52,19 @@ public class Cam : MonoBehaviour
             {
                 transform.position -= new Vector3(movementSpeed,0,0);  
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameObject.transform.position = new Vector3(GameManager.Instance.player.transform.position.x,transform.position.y, GameManager.Instance.player.transform.position.z + 20);
+            }
+            
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                movementSpeed = 1;
+            }
+            else
+            {
+                movementSpeed = .5f;
+            }
     }
-    
 }

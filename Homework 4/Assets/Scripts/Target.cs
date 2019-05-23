@@ -1,29 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Target : MonoBehaviour
 {
-
-   
     private int _mouseBtn = -1;
+    private LineRenderer _lineRenderer;
+    public NavMeshAgent playerAgent;
 
-
-
-    private void UpdateTargets ( Vector3 targetPosition )
+    private void Start()
     {
-      
-  //    foreach(NavMeshAgent agent in GameManager.Instance.navAgents)
-    //  {
-      //   agent.destination = targetPosition;
-      //}
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update ()
     {
-        
+        HotKeys();   
+        DrawLine();
+    }
+
+    private bool GetInput(ref int btn)
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            btn = 0;
+            return true;
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            btn = 1;
+            return true;
+        }
+        return false;
+    }
+
+    private void DrawLine()
+    {
+        if (playerAgent.hasPath)
+        {
+            _lineRenderer.positionCount = playerAgent.path.corners.Length;
+            _lineRenderer.SetPositions(playerAgent.path.corners);
+            _lineRenderer.enabled = true;
+        }
+        else
+        {
+            _lineRenderer.enabled = false;
+        }
+    }
+    private void HotKeys()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1) || (Input.GetKeyDown(KeyCode.Keypad1)))
         {
             float min = 0;
@@ -69,7 +98,6 @@ public class Target : MonoBehaviour
             }       
             GameManager.Instance.SetTarget(target);
         }
-        //if (Input.GetKeyDown((KeyCode.)))
         if(GetInput(ref _mouseBtn)) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -78,14 +106,10 @@ public class Target : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo)) 
             {
                 Vector3 targetPosition = hitInfo.point;
-              //  UpdateTargets(targetPosition);
-               // targetMarker.position = targetPosition;
-
                 if (_mouseBtn == 1)
                 {
                     GameManager.Instance.player.GetComponent<Bot>().agent.stoppingDistance =
                     Vector3.Distance(GameManager.Instance.player.transform.position, targetPosition) * 0.7f;
-                   // GameManager.Instance.player.GetComponent<Bot>().agent.speed = 5;
                 }
                 else if (_mouseBtn == 0)
                 {
@@ -97,25 +121,5 @@ public class Target : MonoBehaviour
             }
         }
     }
-
-    private bool GetInput(ref int btn)
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            btn = 0;
-            return true;
-        }
-
-        if(Input.GetMouseButtonDown(1))
-        {
-            btn = 1;
-            return true;
-        }
-        return false;
-    }
-
-    private void OnDrawGizmos() 
-    {
-      //  Debug.DrawLine(, targetMarker.position + Vector3.up * 5, Color.red);
-    }
 }
+
