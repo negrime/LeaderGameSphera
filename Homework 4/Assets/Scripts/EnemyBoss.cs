@@ -23,9 +23,32 @@ public class EnemyBoss : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.enemyAmount >= GameManager.Instance.playerAmount)
+        _agent.SetDestination(GameManager.Instance.enemyTarget);
+        if (GameManager.Instance.enemyAmount > GameManager.Instance.playerAmount)
         {
-            Debug.Log("tobe pizda");
+            GameManager.Instance.enemyTarget = GameManager.Instance.player.transform.position;
+        }
+        else
+        {
+            float min = 0;
+            Vector3 target = new Vector3();
+            bool index = false;
+            foreach (var i in GameManager.Instance.neutralVillages)
+            {
+                if (!index)
+                {
+                    min = Vector3.Distance(gameObject.transform.position, i.transform.position);
+                    index = true;
+                    target = i.GetComponent<Village>().spawnPosition.position ;
+                }
+                else if (Vector3.Distance(gameObject.transform.position, i.transform.position) < min)
+                {
+                    min = Vector3.Distance(gameObject.transform.position, i.transform.position);
+                    target = i.GetComponent<Village>().spawnPosition.position ;
+                }
+            }
+
+            GameManager.Instance.enemyTarget = target;
         }
         
     }

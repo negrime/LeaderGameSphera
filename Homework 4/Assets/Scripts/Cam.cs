@@ -10,7 +10,6 @@ public class Cam : MonoBehaviour
     void Start()
     {
         _camera = GetComponent<Camera>();
-        Debug.Log(GameManager.Instance.player.transform.position.x);
     }
     
 

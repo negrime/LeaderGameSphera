@@ -196,7 +196,7 @@ Rigidbody:
   m_GameObject: {fileID: 6561502805967036794}
   serializedVersion: 2
   m_Mass: 10
-  m_Drag: 20
+  m_Drag: 10
   m_AngularDrag: 20
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -233,6 +233,8 @@ MonoBehaviour:
   explosion: {fileID: 198694502634222740, guid: b29cbc38fa7ef3741ac2a8a9b3c467b6,
     type: 3}
   botType: 2
+  logTxt: {fileID: 0}
+  logCanvas: {fileID: 0}
   playerMaterial: {fileID: 2100000, guid: 821356836745148b79c675a9f41070c7, type: 2}
   enemyMaterial: {fileID: 2100000, guid: 0f7bdc654933c42da8992f21689150c9, type: 2}
 --- !u!195 &1910731008227920577

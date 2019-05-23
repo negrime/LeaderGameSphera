@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
-
+using UnityEngine.UI;
 public class Bot : MonoBehaviour
 {
     public NavMeshAgent agent;
@@ -17,6 +17,8 @@ public class Bot : MonoBehaviour
     public enum BotType {Player, Enemy, Neutral}
     public BotType botType;
     private readonly Vector3[]  _directions = new[] {Vector3.forward, Vector3.left, Vector3.right};
+    public GameObject logTxt;
+    public Transform logCanvas;
     [Header("Materials")] 
     public Material playerMaterial;
     public Material enemyMaterial;
@@ -24,9 +26,9 @@ public class Bot : MonoBehaviour
    
     void Start()
     {
+       
         _player = GameObject.Find("Player").transform;
         _renderer = GetComponent<Renderer>();
-       
         if (botType != BotType.Neutral)
         {
             GameManager.Instance.AddUnit(tag);
@@ -34,16 +36,15 @@ public class Bot : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
 
-
     }
 
 
     void Update()
     {
-        if (botType == BotType.Enemy && Vector3.Distance(_player.position, gameObject.transform.position) < 25 && (!agent.hasPath))
-        {
-            agent.SetDestination(_player.position);
-        }
+//        if (botType == BotType.Enemy && Vector3.Distance(_player.position, gameObject.transform.position) < 25 && (!agent.hasPath))
+//        {
+//            agent.SetDestination(_player.position);
+//        }
 
         // Запуск 3х лучей
         foreach (var i  in _directions)
@@ -66,16 +67,18 @@ public class Bot : MonoBehaviour
         }
 
         if (botType == BotType.Player)    
-         agent.SetDestination(GameManager.Instance.target);
+         agent.SetDestination(GameManager.Instance.playerTarget);
+        else if (botType == BotType.Enemy)
+        {
+            agent.SetDestination(GameManager.Instance.enemyTarget);
+        }
     }
 
     public void Die(GameObject go)
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(go);
-
     }
-    
 
 
     private void OnTriggerEnter(Collider other)
@@ -84,13 +87,11 @@ public class Bot : MonoBehaviour
         {
             if (other.gameObject.tag.Equals("Player"))
             {
+              
+                    GameManager.Instance.SpawnText(Color.cyan, GameManager.Instance.player.transform, logCanvas);
                 _renderer.material.color = playerMaterial.color;
                Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
                r[1].material.color = playerMaterial.color;
-
-
-               
-             //  kek.material = enemyMaterial;
                agent.stoppingDistance = 3;
                gameObject.tag = other.gameObject.tag;
                botType = BotType.Player;
@@ -99,6 +100,8 @@ public class Bot : MonoBehaviour
             else if (other.gameObject.tag.Equals("Enemy"))
             {
                 _renderer.material.color = enemyMaterial.color;
+                Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
+                r[1].material.color = enemyMaterial.color;
                 tag = other.gameObject.tag;
                 botType = BotType.Enemy;
                 GameManager.Instance.AddUnit(tag);
@@ -108,7 +111,7 @@ public class Bot : MonoBehaviour
         if (botType == BotType.Enemy)
         {
             int rnd = Random.Range(0, 2);
-            if ((other.gameObject.tag.Equals("Player") && (other.gameObject.name != "Player")))
+            if ((other.gameObject.tag.Equals("Player") && (other.gameObject.name != "Player") && gameObject.name != "EnemyBoss"))
             {
                 if (rnd == 1)
                 {
@@ -132,11 +135,13 @@ public class Bot : MonoBehaviour
         if (botType == BotType.Player)
         {
             int rnd = Random.Range(0, 2);
-            if (other.gameObject.tag.Equals("Enemy") && (gameObject.name != "Player"))
+            if (other.gameObject.tag.Equals("Enemy") && (other.gameObject.name != "EnemyBoss") && gameObject.name != "Player")
             {
                 if (rnd == 1)
                 {
                     _renderer.material.color = enemyMaterial.color;
+                    Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
+                    r[1].material.color = enemyMaterial.color;
                     tag = other.gameObject.tag;
                     botType = BotType.Enemy;
                     GameManager.Instance.RemoveUnit("Player");

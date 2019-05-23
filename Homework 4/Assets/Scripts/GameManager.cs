@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class GameManager : MonoBehaviour
     public Transform targetMarker;
 
     public GameObject player;
-    public Vector3 target;
+    public Vector3 playerTarget;
+    public Vector3 enemyTarget;
+    public GameObject logTxt;
 
     private void Awake()
     {
-        target = GameObject.Find("Player").transform.position;
+        playerTarget = GameObject.Find("Player").transform.position;
         Instance = this;
     }
 
@@ -55,7 +58,14 @@ public class GameManager : MonoBehaviour
 
     public void SetTarget(Vector3 target)
     {
-        this.target = target;
+        this.playerTarget = target;
         targetMarker.position = target;
+    }
+
+    public void SpawnText(Color color, Transform transform, Transform canvas, string message = "+1")
+    {
+        GameObject go = Instantiate(logTxt, transform.position, Quaternion.identity, canvas);
+        go.gameObject.GetComponent<Text>().text = message;
+        go.gameObject.GetComponent<Text>().color = color;
     }
 }

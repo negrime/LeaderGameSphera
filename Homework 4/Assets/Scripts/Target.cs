@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
 
     private void Update ()
     {
-        HotKeys();   
+        HotKeys(); 
         DrawLine();
     }
 
@@ -109,14 +109,13 @@ public class Target : MonoBehaviour
                 if (_mouseBtn == 1)
                 {
                     GameManager.Instance.player.GetComponent<Bot>().agent.stoppingDistance =
-                    Vector3.Distance(GameManager.Instance.player.transform.position, targetPosition) * 0.7f;
+                    Vector3.Distance(GameManager.Instance.player.transform.position, targetPosition) * 0.98f;
                 }
                 else if (_mouseBtn == 0)
                 {
                     GameManager.Instance.player.GetComponent<Bot>().agent.stoppingDistance = 1;
                     GameManager.Instance.player.GetComponent<Bot>().agent.speed = 10;
                 }
-           
                 GameManager.Instance.SetTarget(targetPosition);
             }
         }
