@@ -4,35 +4,28 @@ using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
-    public GameObject explosion;   
-    void Start()
-    {
-        
-    }
+    [Header("Meteorite")] 
+    private bool _meteorIsReady;
+    public float meteorCooldownTime;
+    private float _time;
+    public GameObject meteorite;   
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        _time += Time.deltaTime;
+        UiManager.Ui.SetCooldown(_time / meteorCooldownTime);
+        if (_time >= meteorCooldownTime)
         {
-            Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-            gameObject.GetComponent<SphereCollider>().enabled = true;
-            StartCoroutine(EnableCollider());
+            _meteorIsReady = true;
+        }
+        if (Input.GetKeyDown(KeyCode.X) && _meteorIsReady)
+        {
+            Instantiate(meteorite, new Vector3(transform.position.x, transform.position.y + 60, transform.position.z), Quaternion.identity);
+            _time = 0;
+            _meteorIsReady = false;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy") && gameObject.GetComponent<SphereCollider>().enabled)
-        {
-            other.GetComponent<Bot>().Die(other.gameObject);
-        }
-    }
-
-    IEnumerator EnableCollider()
-    {
-        yield return new WaitForSeconds(.1f);
-        Debug.Log("huy");
-        gameObject.GetComponent<SphereCollider>().enabled = false;
-    }
+ 
 }

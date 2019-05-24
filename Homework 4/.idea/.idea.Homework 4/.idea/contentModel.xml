@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\scorp\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\scorp\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Homework 4.-1129309606.00" t="ExcludeRecursive" />
+    <e p="C:\Users\scorp\Desktop\GIT\LeaderGameSphera\Homework 4" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -75,6 +77,7 @@
           <e p="FPS.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="LogText.cs" t="Include" />
+          <e p="Meteorite.cs" t="Include" />
           <e p="MiniMap.cs" t="Include" />
           <e p="PlayerSkills.cs" t="Include" />
           <e p="Target.cs" t="Include" />
@@ -90,7 +93,5 @@
         <e p="bin" t="ExcludeRecursive" />
       </e>
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_Homework 4.399197039.00" t="ExcludeRecursive" />
   </component>
 </project>

@@ -11,5 +11,6 @@ public class LogText : MonoBehaviour
     void Update()
     {
         transform.Translate(speed * Vector3.up * Time.deltaTime, Space.World);
+        Destroy(gameObject, 1.5f);
     }
 }

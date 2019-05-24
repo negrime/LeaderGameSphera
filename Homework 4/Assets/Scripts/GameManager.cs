@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Vector3 playerTarget;
     public Vector3 enemyTarget;
     public GameObject logTxt;
+    public Transform canvas;
 
     private void Awake()
     {
@@ -62,10 +64,13 @@ public class GameManager : MonoBehaviour
         targetMarker.position = target;
     }
 
-    public void SpawnText(Color color, Transform transform, Transform canvas, string message = "+1")
+    public void SpawnText(Color color, Transform transform, string message = "+1")
     {
+        color.a = .5f;
         GameObject go = Instantiate(logTxt, transform.position, Quaternion.identity, canvas);
+        go.transform.SetParent(canvas);
         go.gameObject.GetComponent<Text>().text = message;
         go.gameObject.GetComponent<Text>().color = color;
+        
     }
 }

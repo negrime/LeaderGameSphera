@@ -11,7 +11,6 @@ public class EnemyBoss : MonoBehaviour
     }
     [SerializeField]
     private NavMeshAgent _agent;
-
     [Header("Settings")] 
     public int minArmyAmount;
     
@@ -24,7 +23,7 @@ public class EnemyBoss : MonoBehaviour
     private void Update()
     {
         _agent.SetDestination(GameManager.Instance.enemyTarget);
-        if (GameManager.Instance.enemyAmount > GameManager.Instance.playerAmount)
+        if (GameManager.Instance.enemyAmount > GameManager.Instance.playerAmount && Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) < 80)
         {
             GameManager.Instance.enemyTarget = GameManager.Instance.player.transform.position;
         }
@@ -47,14 +46,7 @@ public class EnemyBoss : MonoBehaviour
                     target = i.GetComponent<Village>().spawnPosition.position ;
                 }
             }
-
             GameManager.Instance.enemyTarget = target;
         }
-        
-    }
-    
-    private void Wait()
-    {
-        
     }
 }

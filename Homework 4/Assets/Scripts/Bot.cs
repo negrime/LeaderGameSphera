@@ -87,8 +87,8 @@ public class Bot : MonoBehaviour
         {
             if (other.gameObject.tag.Equals("Player"))
             {
-              
-                    GameManager.Instance.SpawnText(Color.cyan, GameManager.Instance.player.transform, logCanvas);
+                //                Instantiate(logTxt, transform.position, Quaternion.identity, logCanvas);
+                GameManager.Instance.SpawnText(Color.cyan, transform);
                 _renderer.material.color = playerMaterial.color;
                Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
                r[1].material.color = playerMaterial.color;
@@ -115,6 +115,7 @@ public class Bot : MonoBehaviour
             {
                 if (rnd == 1)
                 {
+                    GameManager.Instance.SpawnText(Color.yellow, transform);
                     _renderer.material.color = playerMaterial.color;
                     Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
                     r[1].material.color = playerMaterial.color;
@@ -125,6 +126,7 @@ public class Bot : MonoBehaviour
                 }
                 else
                 {
+                    GameManager.Instance.SpawnText(Color.red, transform, "-1");
                     other.GetComponent<Bot>().Die(other.gameObject);
                     GameManager.Instance.RemoveUnit("Player");
                 }
@@ -139,6 +141,7 @@ public class Bot : MonoBehaviour
             {
                 if (rnd == 1)
                 {
+                    GameManager.Instance.SpawnText(Color.red, transform, "-1");
                     _renderer.material.color = enemyMaterial.color;
                     Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
                     r[1].material.color = enemyMaterial.color;

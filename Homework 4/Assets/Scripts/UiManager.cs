@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
+    public static UiManager Ui { get; private set; }
     public Text armyStrength;
     public GameObject instructionPanel;
+    public Image meteorCoolDown;
     void Start()
     {
-        
+        Ui = this;
     }
 
     void Update()
@@ -20,5 +22,10 @@ public class UiManager : MonoBehaviour
     public void InstructionClick()
     {
         instructionPanel.SetActive(false);
+    }
+
+    public void SetCooldown(float value)
+    {
+        meteorCoolDown.fillAmount = value;
     }
 }
