@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+ 
         totalSum = playerAmount + enemyAmount;
     }
 
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour
 
     public void RemoveUnit(string ally)
     {
+        if (playerAmount <= 1)
+            GameOver();
         if (ally.Equals("Enemy") && enemyAmount != 0)
         {
             enemyAmount--;
@@ -66,11 +69,16 @@ public class GameManager : MonoBehaviour
 
     public void SpawnText(Color color, Transform transform, string message = "+1")
     {
-        color.a = .5f;
+        //color.a = .5f;
         GameObject go = Instantiate(logTxt, transform.position, Quaternion.identity, canvas);
         go.transform.SetParent(canvas);
         go.gameObject.GetComponent<Text>().text = message;
         go.gameObject.GetComponent<Text>().color = color;
-        
     }
+
+    private void GameOver()
+    {
+
+    }
+    
 }

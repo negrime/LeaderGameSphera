@@ -8,9 +8,13 @@ public class PlayerSkills : MonoBehaviour
     private bool _meteorIsReady;
     public float meteorCooldownTime;
     private float _time;
-    public GameObject meteorite;   
+    public GameObject meteorite;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        _time = meteorCooldownTime;
+    }
+
     void Update()
     {
         _time += Time.deltaTime;

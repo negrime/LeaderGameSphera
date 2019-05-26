@@ -13,10 +13,10 @@ public class Bot : MonoBehaviour
     public ParticleSystem explosion;
 
 
-
+    public bool isSubjection;
     public enum BotType {Player, Enemy, Neutral}
     public BotType botType;
-    private readonly Vector3[]  _directions = new[] {Vector3.forward, Vector3.left, Vector3.right};
+    private readonly Vector3[]  _directions = new[] {Vector3.forward, Vector3.left, Vector3.right, new Vector3(0.5f,0,0.5f), new Vector3(-0.5f,0,-0.5f) };
     public GameObject logTxt;
     public Transform logCanvas;
     [Header("Materials")] 
@@ -34,8 +34,6 @@ public class Bot : MonoBehaviour
             GameManager.Instance.AddUnit(tag);
         }
         agent = GetComponent<NavMeshAgent>();
-
-
     }
 
 
@@ -49,7 +47,7 @@ public class Bot : MonoBehaviour
         // Запуск 3х лучей
         foreach (var i  in _directions)
         {
-            if (botType == BotType.Enemy)
+            if (botType == BotType.Enemy && gameObject.name != "EnemyBoss")
             {
                 RaycastHit hit;
                 Debug.DrawRay(transform.position, i * 50, Color.green);
@@ -68,7 +66,7 @@ public class Bot : MonoBehaviour
 
         if (botType == BotType.Player)    
          agent.SetDestination(GameManager.Instance.playerTarget);
-        else if (botType == BotType.Enemy)
+        else if (botType == BotType.Enemy && isSubjection)
         {
             agent.SetDestination(GameManager.Instance.enemyTarget);
         }
@@ -87,15 +85,17 @@ public class Bot : MonoBehaviour
         {
             if (other.gameObject.tag.Equals("Player"))
             {
+                gameObject.tag = other.gameObject.tag;
+                GameManager.Instance.AddUnit(tag);
                 //                Instantiate(logTxt, transform.position, Quaternion.identity, logCanvas);
                 GameManager.Instance.SpawnText(Color.cyan, transform);
                 _renderer.material.color = playerMaterial.color;
                Renderer[] r =  gameObject.GetComponentsInChildren<Renderer>();
                r[1].material.color = playerMaterial.color;
                agent.stoppingDistance = 3;
-               gameObject.tag = other.gameObject.tag;
+
                botType = BotType.Player;
-               GameManager.Instance.AddUnit(tag);
+              
             }
             else if (other.gameObject.tag.Equals("Enemy"))
             {
@@ -105,6 +105,7 @@ public class Bot : MonoBehaviour
                 tag = other.gameObject.tag;
                 botType = BotType.Enemy;
                 GameManager.Instance.AddUnit(tag);
+                isSubjection = true;
             }
         }
 

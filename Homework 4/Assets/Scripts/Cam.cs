@@ -54,7 +54,7 @@ public class Cam : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameObject.transform.position = new Vector3(GameManager.Instance.player.transform.position.x,transform.position.y, GameManager.Instance.player.transform.position.z + 20);
+                gameObject.transform.position = new Vector3(GameManager.Instance.player.transform.position.x,transform.position.y, GameManager.Instance.player.transform.position.z + 50);
             }
             
             if (Input.GetKey(KeyCode.LeftShift))
