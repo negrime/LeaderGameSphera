@@ -17,7 +17,6 @@ public class Cam : MonoBehaviour
     {
         Movement();
     }
-    
     private void Movement()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && _camera.transform.position.y >= 15) 

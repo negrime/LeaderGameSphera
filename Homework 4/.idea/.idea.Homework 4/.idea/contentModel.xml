@@ -54,6 +54,10 @@
           <e p="Meteorite.cs" t="Include" />
           <e p="MiniMap.cs" t="Include" />
           <e p="PlayerSkills.cs" t="Include" />
+          <e p="Sort" t="Include">
+            <e p="Ally.cs" t="Include" />
+            <e p="Sort.cs" t="Include" />
+          </e>
           <e p="Target.cs" t="Include" />
           <e p="UiManager.cs" t="Include" />
           <e p="Village.cs" t="Include" />

@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1525777449}
   - component: {fileID: 1525777447}
   - component: {fileID: 1525777446}
+  - component: {fileID: 184153408642663492}
   - component: {fileID: 1525777445}
   - component: {fileID: 1525777452}
   - component: {fileID: 1525777448}
@@ -206,6 +207,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &184153408642663492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525777444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4c9bd1e2c6dd74db8b33d0d30cba37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1525777445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +235,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   explosion: {fileID: 198694502634222740, guid: b29cbc38fa7ef3741ac2a8a9b3c467b6,
     type: 3}
+  isSubjection: 0
   botType: 0
   logTxt: {fileID: 6590582877348210707, guid: 18b70e10e5d8f2b4192eae1fc4e24e7b, type: 3}
   logCanvas: {fileID: 0}
@@ -274,7 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c35e168728e4e318b1601430f141d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1159615438314744, guid: 14cf9b5bc3f9faf4ca5ce80298f43111, type: 3}
+  meteorCooldownTime: 0
+  meteorite: {fileID: 0}
 --- !u!1001 &6419178930869070508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,6 +297,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1390174704}
     m_Modifications:
+    - target: {fileID: 1358717900611202, guid: f3fe15a8090516645a9434bb087186ca, type: 3}
+      propertyPath: m_Name
+      value: shield_2
+      objectReference: {fileID: 0}
     - target: {fileID: 4917872957845154, guid: f3fe15a8090516645a9434bb087186ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.857
@@ -338,10 +357,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1358717900611202, guid: f3fe15a8090516645a9434bb087186ca, type: 3}
-      propertyPath: m_Name
-      value: shield_2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3fe15a8090516645a9434bb087186ca, type: 3}
 --- !u!4 &6414526637302121486 stripped
@@ -357,6 +372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1390174704}
     m_Modifications:
+    - target: {fileID: 1592530796076722, guid: 48f39bd5634d72d4e82593bb88746a87, type: 3}
+      propertyPath: m_Name
+      value: axe_1
+      objectReference: {fileID: 0}
     - target: {fileID: 4804107082955232, guid: 48f39bd5634d72d4e82593bb88746a87, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.431
@@ -412,10 +431,6 @@ PrefabInstance:
     - target: {fileID: 4804107082955232, guid: 48f39bd5634d72d4e82593bb88746a87, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1592530796076722, guid: 48f39bd5634d72d4e82593bb88746a87, type: 3}
-      propertyPath: m_Name
-      value: axe_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f39bd5634d72d4e82593bb88746a87, type: 3}
