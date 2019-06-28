@@ -17,7 +17,7 @@ public class Ally : MonoBehaviour
         _txtPos = GetComponentInChildren<Transform>();
         rank = Random.Range(0, 50);
         agent = GetComponent<NavMeshAgent>();
-        GameManager.Instance.allyes.Add(this);
+        GameManager.Instance.allies.Add(this);
         canvas = GameObject.Find("Canvas").transform;
         rankTxt = Instantiate(rankTxt, _txtPos.position, Quaternion.identity, canvas);
         rankTxt.text = rank.ToString();

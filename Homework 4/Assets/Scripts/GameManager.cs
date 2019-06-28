@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public List<Ally> allyes = new List<Ally>();
+    public List<Ally> allies = new List<Ally>();
+   // public Ally[] allyes = new Ally[1];
     public List<GameObject> neutralVillages;
     public List<GameObject> enemyVillages;
     public int enemyAmount;

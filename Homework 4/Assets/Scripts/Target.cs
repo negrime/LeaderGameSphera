@@ -105,6 +105,8 @@ public class Target : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo)) 
             {
+                if (!hitInfo.transform.CompareTag("Ground"))
+                    return;
                 Vector3 targetPosition = hitInfo.point;
                 if (_mouseBtn == 1)
                 {
